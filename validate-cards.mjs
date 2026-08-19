@@ -47,6 +47,27 @@ for (const [name, minimum] of Object.entries(minimums)) {
   if (pools[name]?.length < minimum) fail(`${name}: seulement ${pools[name]?.length ?? 0} cartes, minimum ${minimum}`);
 }
 
+// 1 mouton doit tester la synchronisation, pas une réponse scolaire unique.
+const deterministicOnePatterns = [
+  /^Le contraire de\b/i,
+  /^La capitale de\b/i,
+  /^Le sport où\b/i,
+  /^Le sport de\b/i,
+  /^Le pays de la\b/i,
+  /^Le pays des\b/i,
+  /^Une? (?:semaine|année|heure|minute|triangle|carré|octogone|vélo|voiture|dé) (?:a|compte)\b/i,
+  /^Une? (?:vache|poule|abeille|mouton) (?:donne|pond|fait)\b/i,
+  /^Pour .+, on utilise\b/i,
+  /^La planète\b/i,
+  /^Le symbole\b/i,
+];
+
+for (const card of pools.one ?? []) {
+  for (const pattern of deterministicOnePatterns) {
+    if (pattern.test(card)) fail(`one: carte trop déterministe / quiz: ${card}`);
+  }
+}
+
 // Une carte Éclair doit être une amorce à compléter, jamais une question ouverte ou un quiz.
 for (const card of pools.lightning ?? []) {
   const blanks = (card.match(/___/g) ?? []).length;
