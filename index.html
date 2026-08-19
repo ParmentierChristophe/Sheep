@@ -351,8 +351,21 @@ function failTurn(){
   $('loss').textContent=lost?`${lost} point${lost>1?'s':''} gagné${lost>1?'s':''} pendant ce tour ${lost>1?'sont':'est'} perdu${lost>1?'s':''}.`:'Aucun point perdu cette fois.';
   $('failed').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
+function finishIfWon(){
+  const t=state.teams[state.active];
+  const total=t.score+state.turnPoints;
+  if(total<7)return false;
+  t.score=total;
+  state.turnPoints=0;
+  $('winner').textContent=`${t.name} gagne avec ${t.score} points`;
+  show('win');
+  return true;
+}
 function showChoice(){
-  state.turnPoints+=currentValue();$('judge').classList.add('hidden');$('failed').classList.add('hidden');$('choice').classList.remove('hidden');ensureNext();
+  state.turnPoints+=currentValue();
+  $('judge').classList.add('hidden');$('failed').classList.add('hidden');
+  if(finishIfWon())return;
+  $('choice').classList.remove('hidden');ensureNext();
   $('choiceTitle').textContent=`${state.turnPoints} point${state.turnPoints>1?'s':''} en jeu`;
   $('choiceCopy').textContent='Encaissez maintenant, ou tentez la prochaine carte et risquez tout le tour.';
   const n=state.next;$('nextPreview').className=`next-card ${cardClass(n.d)}`;
@@ -361,8 +374,10 @@ function showChoice(){
 }
 function switchTeam(){state.active=(state.active+1)%state.teams.length;nextCard();window.scrollTo({top:0,behavior:'smooth'})}
 function bank(){
-  const t=state.teams[state.active],gain=state.turnPoints;t.score+=gain;state.turnPoints=0;
-  if(t.score>=7){$('winner').textContent=`${t.name} gagne`;show('win');return}
+  const gain=state.turnPoints;
+  if(finishIfWon())return;
+  const t=state.teams[state.active];
+  t.score+=gain;state.turnPoints=0;
   toast(`+${gain} point${gain>1?'s':''}`);switchTeam();
 }
 
