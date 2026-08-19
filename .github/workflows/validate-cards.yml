@@ -1,0 +1,23 @@
+name: Validate card banks
+
+on:
+  push:
+    paths:
+      - 'cards-*.js'
+      - 'validate-cards.mjs'
+      - '.github/workflows/validate-cards.yml'
+  pull_request:
+    paths:
+      - 'cards-*.js'
+      - 'validate-cards.mjs'
+      - '.github/workflows/validate-cards.yml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node validate-cards.mjs
