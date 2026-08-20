@@ -7,6 +7,8 @@ on:
       - 'validate-cards.mjs'
       - 'game-engine.js'
       - 'game-engine.test.mjs'
+      - 'app.js'
+      - 'styles.css'
       - 'index.html'
       - '.github/workflows/validate-cards.yml'
   pull_request:
@@ -15,6 +17,8 @@ on:
       - 'validate-cards.mjs'
       - 'game-engine.js'
       - 'game-engine.test.mjs'
+      - 'app.js'
+      - 'styles.css'
       - 'index.html'
       - '.github/workflows/validate-cards.yml'
 
