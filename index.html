@@ -6,142 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#f2eee4">
 <title>Mouton Family</title>
-<style>
-:root{
-  --green:#15846f;
-  --orange:#f28c18;
-  --red:#ef2446;
-  --blue:#244f8c;
-  --paper:#f2eee4;
-  --paper-dark:#e7e0d2;
-  --ink:#171717;
-  --muted:#6d685f;
-  --white:#fffdf8;
-  --line:#171717;
-}
-*{box-sizing:border-box}
-html,body{min-height:100%}
-body{
-  margin:0;
-  background:var(--paper);
-  color:var(--ink);
-  font-family:"Helvetica Neue",Arial,sans-serif;
-  -webkit-tap-highlight-color:transparent;
-}
-button,input{font:inherit}
-button{cursor:pointer;touch-action:manipulation}
-button:active{transform:translate(1px,1px)}
-.hidden{display:none!important}
-.app{width:min(100%,760px);min-height:100dvh;margin:0 auto;padding:max(18px,env(safe-area-inset-top)) 14px max(24px,env(safe-area-inset-bottom))}
-
-/* ---------- GLOBAL STYLE: EDITORIAL / BOARD GAME ---------- */
-.panel,.decision,.win-card{
-  background:var(--white);
-  border:2px solid var(--line);
-  border-radius:14px;
-  box-shadow:5px 5px 0 var(--line);
-}
-.btn,.answer-btn,.exit-btn,.remove-team,.feedback-btn,.card-action,.feedback-option,.modal-close{
-  border:2px solid var(--line);
-  border-radius:10px;
-  font-weight:900;
-}
-
-/* ---------- SETUP ---------- */
-.brand{padding:10px 2px 22px}
-.brand-kicker{font-size:12px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
-.brand h1{margin:0;font-size:clamp(42px,12vw,72px);line-height:.86;letter-spacing:-3px;text-transform:uppercase;font-weight:1000}
-.brand h1 span{display:block}
-.brand p{margin:16px 0 0;max-width:460px;font-size:17px;line-height:1.35;font-weight:700;color:var(--muted)}
-.panel{padding:16px;margin-bottom:14px}
-.panel-title{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding-bottom:11px;margin-bottom:12px;border-bottom:2px solid var(--line)}
-.panel-title h2{margin:0;font-size:18px;text-transform:uppercase;letter-spacing:.04em}
-.panel-title strong{font-size:13px}
-.team-row{display:grid;grid-template-columns:32px 1fr 40px;align-items:center;gap:9px;margin:9px 0}
-.team-dot{width:32px;height:32px;border:2px solid var(--line);border-radius:50%;display:grid;place-items:center;font-weight:1000;background:var(--paper-dark)}
-.team-row input{width:100%;min-width:0;background:transparent;border:0;border-bottom:2px solid var(--line);border-radius:0;padding:10px 2px 8px;font-weight:850;font-size:17px;outline:none}
-.team-row input:focus{background:#fff6cc}
-.remove-team{width:40px;height:40px;background:var(--white);color:var(--ink);font-size:20px}
-.rules-mini{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.rule-pill{min-height:72px;display:flex;flex-direction:column;justify-content:space-between;padding:10px;border:2px solid var(--line);border-radius:10px;color:#fff;font-weight:900;text-transform:uppercase;font-size:10px;letter-spacing:.04em}
-.rule-pill b{font-size:23px;line-height:1}.r1{background:var(--green)}.r2{background:var(--orange)}.r3{background:var(--red)}.rL{background:var(--blue)}
-.btn{width:100%;padding:15px 16px;font-size:16px;background:var(--white);color:var(--ink)}
-.btn-primary{background:var(--ink);color:var(--white)}
-.btn-soft{background:var(--paper)}
-.btn-success{background:var(--green);color:#fff}
-.btn-dark{background:var(--ink);color:#fff}
-.btn-danger{background:var(--red);color:#fff}
-.setup-footer{margin:12px 2px 0;font-size:12px;font-weight:700;color:var(--muted)}
-
-/* ---------- GAME HEADER ---------- */
-.game-top{position:sticky;top:max(8px,env(safe-area-inset-top));z-index:10;margin-bottom:12px}
-.game-bar{display:flex;align-items:stretch;gap:8px;background:var(--paper);padding:0}
-.exit-btn{width:44px;flex:0 0 44px;background:var(--white);font-size:18px;box-shadow:3px 3px 0 var(--line)}
-.scoreboard{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;flex:1;padding-bottom:4px}.scoreboard::-webkit-scrollbar{display:none}
-.score-chip{min-width:128px;background:var(--white);border:2px solid var(--line);border-radius:10px;padding:8px 10px;box-shadow:3px 3px 0 var(--line)}
-.score-chip.active{background:#fff5a8}
-.score-name{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.score-value{display:flex;align-items:center;gap:8px;margin-top:5px}.score-value strong{font-size:20px}.score-track{height:5px;flex:1;background:#d9d2c6;border:1px solid var(--line)}.score-fill{height:100%;background:var(--ink)}
-.turn-label{text-align:left;margin:15px 2px 9px;font-size:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:900}.turn-label strong{font-size:14px;letter-spacing:0}
-
-/* ---------- PHYSICAL CARD ---------- */
-.game-card{
-  position:relative;
-  min-height:470px;
-  border:3px solid var(--line);
-  border-radius:18px;
-  color:#fff;
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;
-  box-shadow:8px 8px 0 var(--line);
-}
-.game-card.d1{background:var(--green)}
-.game-card.d2{background:var(--orange)}
-.game-card.d3{background:var(--red)}
-.game-card.dL{background:var(--blue)}
-.card-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 14px;border-bottom:2px solid rgba(255,255,255,.62)}
-.card-badge{font-size:12px;font-weight:1000;text-transform:uppercase;letter-spacing:.08em}
-.feedback-btn{width:38px;height:34px;background:transparent;color:#fff;border-color:rgba(255,255,255,.8);font-size:16px}
-.question-wrap{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:32px 18px}
-.question{font-size:clamp(31px,8vw,52px);line-height:1.02;font-weight:1000;letter-spacing:-1.6px;text-wrap:balance}
-.instruction{padding:12px 16px;border-top:2px solid rgba(255,255,255,.62);font-size:13px;line-height:1.4;font-weight:800;color:rgba(255,255,255,.9)}
-.card-action{margin:0;border:0;border-top:3px solid var(--line);border-radius:0;background:var(--white);color:var(--ink);padding:17px 16px;font-size:16px;text-transform:uppercase;letter-spacing:.03em}
-
-/* ---------- LIGHTNING ---------- */
-.lightning-stage{width:100%}
-.lightning-counter{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;margin-bottom:16px;color:rgba(255,255,255,.8)}
-.lightning-question{font-size:clamp(30px,7vw,48px);font-weight:1000;line-height:1.05;text-wrap:balance}
-.lightning-dots{display:flex;justify-content:center;gap:7px;margin-top:22px}.lightning-dot{width:10px;height:10px;border:2px solid #fff}.lightning-dot.done{background:#fff}.lightning-dot.current{background:#fff;transform:rotate(45deg)}
-
-/* ---------- DECISIONS ---------- */
-.decision{margin-top:18px;padding:16px}
-.decision-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.14em;font-weight:1000;margin-bottom:7px}
-.decision h3{margin:0 0 7px;font-size:26px;line-height:1.05}.decision p{margin:0 0 14px;font-size:14px;line-height:1.4;color:var(--muted);font-weight:700}
-.pot-chip{display:inline-block;background:#fff5a8;border:2px solid var(--line);border-radius:8px;padding:6px 9px;font-weight:900;margin-bottom:12px}
-.answer-actions,.risk-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.answer-btn{min-height:58px;font-size:16px}.answer-no{background:#fff;color:var(--ink)}.answer-yes{background:var(--ink);color:#fff}
-.next-card{display:grid;grid-template-columns:58px 1fr;align-items:stretch;border:2px solid var(--line);border-radius:10px;overflow:hidden;margin:13px 0 14px;color:#fff}
-.next-card.d1{background:var(--green)}.next-card.d2{background:var(--orange)}.next-card.d3{background:var(--red)}.next-card.dL{background:var(--blue)}
-.next-icon{display:grid;place-items:center;border-right:2px solid var(--line);font-size:23px;font-weight:1000}.next-copy{padding:10px 12px}.next-copy small{display:block;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.1em}.next-copy strong{display:block;margin-top:4px;font-size:17px}
-.loss{border:2px solid var(--line);background:#ffe2e2;padding:10px;border-radius:8px;margin:10px 0 13px;font-weight:850}
-
-/* ---------- MODAL / TOAST ---------- */
-.modal-backdrop{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.45);display:flex;align-items:flex-end;justify-content:center;padding:14px}
-.modal{width:min(100%,560px);background:var(--white);border:3px solid var(--line);border-radius:14px;padding:16px;box-shadow:8px 8px 0 var(--line)}
-.modal h3{margin:0 0 6px;font-size:22px}.modal p{margin:0 0 12px;color:var(--muted);font-weight:700}.feedback-grid{display:grid;gap:8px}.feedback-option{padding:13px;text-align:left;background:var(--paper);color:var(--ink)}.modal-close{margin-top:9px;padding:12px;width:100%;background:var(--white);color:var(--ink)}
-.toast{position:fixed;left:50%;bottom:max(20px,env(safe-area-inset-bottom));z-index:80;transform:translateX(-50%);background:var(--ink);color:#fff;border:2px solid var(--ink);border-radius:8px;padding:10px 14px;font-weight:850;box-shadow:4px 4px 0 #000}
-
-/* ---------- WIN ---------- */
-.win-card{margin-top:10vh;padding:24px}.win-kicker{font-size:12px;text-transform:uppercase;letter-spacing:.12em;font-weight:1000}.win-card h2{margin:12px 0 8px;font-size:42px;line-height:.9;text-transform:uppercase;letter-spacing:-2px}.win-card p{margin:0 0 18px;color:var(--muted);font-weight:700}
-
-@media(max-width:520px){
-  .app{padding-left:11px;padding-right:11px}
-  .game-card{min-height:455px;border-radius:15px;box-shadow:6px 6px 0 var(--line)}
-  .question{font-size:clamp(30px,10vw,48px)}
-  .score-chip{min-width:116px}
-  .answer-actions,.risk-actions{grid-template-columns:1fr 1fr}
-}
-</style>
+<link rel="stylesheet" href="./styles.css">
 </head>
 <body>
 <div class="app">
@@ -168,7 +33,10 @@ button:active{transform:translate(1px,1px)}
       </div>
     </div>
 
-    <button id="start" class="btn btn-primary">Lancer la partie</button>
+    <div class="setup-actions">
+      <button id="start" class="btn btn-primary">Lancer la partie</button>
+      <button id="openStats" class="btn btn-soft">Stats de test</button>
+    </div>
     <div class="setup-footer">Pendant les tests : le bouton « ! » sert à signaler une carte mal calibrée.</div>
   </section>
 
@@ -182,7 +50,20 @@ button:active{transform:translate(1px,1px)}
 
     <div id="turnLabel" class="turn-label"></div>
 
-    <div id="questionCard" class="game-card d1">
+    <div id="handoff" class="handoff-card hidden">
+      <div class="handoff-kicker">Nouveau tour</div>
+      <div class="handoff-main">
+        <small>À vous</small>
+        <h2 id="handoffTeam"></h2>
+        <div id="handoffScore" class="handoff-score"></div>
+      </div>
+      <div>
+        <p class="handoff-note">La carte reste cachée jusqu’à ce que tout le monde soit prêt. Le lecteur peut alors la révéler.</p>
+        <button id="revealCard" class="btn btn-primary">Révéler la carte</button>
+      </div>
+    </div>
+
+    <div id="questionCard" class="game-card d1 hidden">
       <div class="card-head">
         <div id="badge" class="card-badge"></div>
         <button id="feedback" class="feedback-btn" aria-label="Noter cette carte">!</button>
@@ -253,159 +134,27 @@ button:active{transform:translate(1px,1px)}
   </div>
 </div>
 
+<div id="statsModal" class="modal-backdrop hidden">
+  <div class="modal">
+    <h3>Playtest</h3>
+    <p class="stats-intro">Ces statistiques restent sur cet appareil. Elles servent à vérifier le calibrage réel des cartes, pas à noter les joueurs.</p>
+    <div id="statsSummary" class="stats-summary"></div>
+    <div id="feedbackSummary" class="feedback-summary"></div>
+    <h4 class="stats-subtitle">Cartes signalées</h4>
+    <div id="problemCards"></div>
+    <div class="stats-actions">
+      <button id="exportStats" class="btn btn-primary">Exporter JSON</button>
+      <button id="resetStats" class="btn btn-soft">Effacer les données</button>
+    </div>
+    <button id="statsClose" class="modal-close">Fermer</button>
+  </div>
+</div>
+
 <script src="./cards-one.js"></script>
 <script src="./cards-two.js"></script>
 <script src="./cards-three.js"></script>
 <script src="./cards-lightning.js"></script>
-<script>
-const one=window.SHEEP_ONE,two=window.SHEEP_TWO,three=window.SHEEP_THREE,lightning=window.SHEEP_LIGHTNING,$=id=>document.getElementById(id);
-const state={teams:[],active:0,current:null,next:null,usedNormal:new Set(),lightningDeck:[],turnPoints:0,lightningIndex:0};
-
-$('cardCount').textContent=`${one.length+two.length+three.length+lightning.length} thèmes`;
-
-function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function show(id){['setup','game','win'].forEach(x=>$(x).classList.add('hidden'));$(id).classList.remove('hidden')}
-function hideDecisions(){['judge','choice','failed'].forEach(x=>$(x).classList.add('hidden'))}
-function toast(text){const el=document.createElement('div');el.className='toast';el.textContent=text;document.body.appendChild(el);setTimeout(()=>el.remove(),1700)}
-function escapeHtml(value){return String(value).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
-
-function addTeam(name){
-  const row=document.createElement('div');row.className='team-row';
-  row.innerHTML='<div class="team-dot">M</div><input placeholder="Nom de l’équipe"><button class="remove-team" aria-label="Supprimer">×</button>';
-  row.querySelector('input').value=name||'';
-  row.querySelector('.remove-team').onclick=()=>{if($('teams').children.length>2)row.remove();else toast('Il faut au moins 2 équipes')};
-  $('teams').appendChild(row);
-}
-addTeam('Les Bêêêles');addTeam('Les Frisés');
-$('add').onclick=()=>addTeam('Équipe '+($('teams').children.length+1));
-
-function renderScores(){
-  $('scores').innerHTML=state.teams.map((t,i)=>`<div class="score-chip ${i===state.active?'active':''}"><div class="score-name">${i===state.active?'●':'○'} ${escapeHtml(t.name)}</div><div class="score-value"><strong>${t.score}</strong><div class="score-track"><div class="score-fill" style="width:${Math.min(100,t.score/7*100)}%"></div></div></div></div>`).join('');
-  $('turnLabel').innerHTML=`Au tour de <strong>${escapeHtml(state.teams[state.active].name)}</strong>`;
-}
-
-function randomNormalCard(){
-  const r=Math.random(),d=r<.38?1:r<.72?2:3,pool=d===1?one:d===2?two:three;
-  let idx,key,guard=0;
-  do{idx=Math.floor(Math.random()*pool.length);key=`${d}:${idx}`;guard++}while(state.usedNormal.has(key)&&guard<2000);
-  if(guard>=2000){state.usedNormal.clear();return randomNormalCard()}
-  state.usedNormal.add(key);return{d,q:pool[idx],id:key};
-}
-function refillLightningDeck(){state.lightningDeck=shuffle(lightning.map((_,i)=>i))}
-function drawLightningCard(){
-  if(state.lightningDeck.length<4)refillLightningDeck();
-  const ids=state.lightningDeck.splice(0,4);
-  return{d:'L',questions:ids.map(i=>lightning[i]),ids,id:`L:${ids.join('-')}`};
-}
-function draw(){return Math.random()<.30?drawLightningCard():randomNormalCard()}
-function ensureNext(){if(!state.next)state.next=draw()}
-function takeNext(){ensureNext();state.current=state.next;state.next=null;ensureNext()}
-function currentValue(){return state.current.d==='L'?1:Number(state.current.d)}
-function difficultyLabel(d){return d==='L'?'ÉCLAIR · 1 POINT':`${d} MOUTON${d>1?'S':''} · ${d} POINT${d>1?'S':''}`}
-function cardClass(d){return 'd'+d}
-
-function renderCard(){
-  const d=state.current.d;state.lightningIndex=0;
-  $('questionCard').className=`game-card ${cardClass(d)}`;
-  $('badge').textContent=d==='L'?'ÉCLAIR · 1 POINT':`${d} MOUTON${d>1?'S':''} · ${d} POINT${d>1?'S':''}`;
-  $('question').classList.toggle('hidden',d==='L');$('lightningStage').classList.toggle('hidden',d!=='L');
-  hideDecisions();renderScores();
-  if(d==='L'){
-    $('instruction').textContent='4 amorces à la suite. Pas de « 1, 2, 3 » entre les réponses.';
-    $('cardAction').textContent='Démarrer l’éclair';
-    $('cardAction').onclick=startLightning;
-    renderLightningPrompt(false);
-  }else{
-    $('question').textContent=state.current.q;
-    $('instruction').textContent='Réfléchissez en silence. Puis « 1, 2, 3 » et répondez ensemble.';
-    $('cardAction').textContent='Réponses données';
-    $('cardAction').onclick=openJudge;
-  }
-}
-function nextCard(){takeNext();renderCard()}
-
-function renderLightningPrompt(started=true){
-  const i=state.lightningIndex;
-  $('lightningCounter').textContent=started?`${i+1} / 4`:'ÉCLAIR';
-  $('lightningQuestion').textContent=started?state.current.questions[i]:'Prêts ?';
-  $('lightningDots').innerHTML=[0,1,2,3].map(n=>`<span class="lightning-dot ${n<i?'done':n===i&&started?'current':''}"></span>`).join('');
-}
-function startLightning(){state.lightningIndex=0;renderLightningPrompt(true);$('cardAction').textContent='Suivante';$('cardAction').onclick=advanceLightning}
-function advanceLightning(){if(state.lightningIndex<3){state.lightningIndex++;renderLightningPrompt(true);if(state.lightningIndex===3)$('cardAction').textContent='Terminer'}else openJudge()}
-function openJudge(){
-  $('judge').classList.remove('hidden');$('choice').classList.add('hidden');$('failed').classList.add('hidden');
-  $('pot').textContent=state.turnPoints?`${state.turnPoints} point${state.turnPoints>1?'s':''} déjà en jeu`:'Premier gain du tour';
-  if(state.current.d==='L'){
-    $('judgeTitle').textContent='4 sur 4 ?';
-    $('judgeCopy').textContent='Une seule différence suffit à rater toute la carte.';
-    $('no').textContent='Au moins une erreur';$('yes').textContent='4 réponses identiques';
-  }else{
-    $('judgeTitle').textContent='Même réponse ?';
-    $('judgeCopy').textContent='La réponse doit être exactement la même.';
-    $('no').textContent='Différentes';$('yes').textContent='Identiques';
-  }
-  $('judge').scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-function failTurn(){
-  const lost=state.turnPoints;state.turnPoints=0;$('judge').classList.add('hidden');$('choice').classList.add('hidden');$('failed').classList.remove('hidden');
-  $('loss').textContent=lost?`${lost} point${lost>1?'s':''} gagné${lost>1?'s':''} pendant ce tour ${lost>1?'sont':'est'} perdu${lost>1?'s':''}.`:'Aucun point perdu cette fois.';
-  $('failed').scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-function finishIfWon(){
-  const t=state.teams[state.active];
-  const total=t.score+state.turnPoints;
-  if(total<7)return false;
-  t.score=total;
-  state.turnPoints=0;
-  $('winner').textContent=`${t.name} gagne avec ${t.score} points`;
-  show('win');
-  return true;
-}
-function showChoice(){
-  state.turnPoints+=currentValue();
-  $('judge').classList.add('hidden');$('failed').classList.add('hidden');
-  if(finishIfWon())return;
-  $('choice').classList.remove('hidden');ensureNext();
-  $('choiceTitle').textContent=`${state.turnPoints} point${state.turnPoints>1?'s':''} en jeu`;
-  $('choiceCopy').textContent='Encaissez maintenant, ou tentez la prochaine carte et risquez tout le tour.';
-  const n=state.next;$('nextPreview').className=`next-card ${cardClass(n.d)}`;
-  $('nextPreview').innerHTML=`<div class="next-icon">${n.d==='L'?'4×':n.d}</div><div class="next-copy"><small>Prochaine carte</small><strong>${difficultyLabel(n.d)}</strong></div>`;
-  $('choice').scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-function switchTeam(){state.active=(state.active+1)%state.teams.length;nextCard();window.scrollTo({top:0,behavior:'smooth'})}
-function bank(){
-  const gain=state.turnPoints;
-  if(finishIfWon())return;
-  const t=state.teams[state.active];
-  t.score+=gain;state.turnPoints=0;
-  toast(`+${gain} point${gain>1?'s':''}`);switchTeam();
-}
-
-$('no').onclick=failTurn;$('yes').onclick=showChoice;$('bank').onclick=bank;$('continue').onclick=()=>{nextCard();window.scrollTo({top:0,behavior:'smooth'})};$('nextTeam').onclick=switchTeam;
-
-$('start').onclick=()=>{
-  state.teams=[...$('teams').querySelectorAll('input')].map((x,i)=>({name:x.value.trim()||`Équipe ${i+1}`,score:0}));
-  state.active=0;state.turnPoints=0;state.usedNormal.clear();state.next=null;refillLightningDeck();show('game');nextCard();window.scrollTo(0,0);
-};
-$('rematch').onclick=()=>{state.teams.forEach(t=>t.score=0);state.active=0;state.turnPoints=0;state.usedNormal.clear();state.next=null;refillLightningDeck();show('game');nextCard();window.scrollTo(0,0)};
-$('backSetup').onclick=()=>show('setup');
-$('exit').onclick=()=>{if(confirm('Quitter la partie en cours ?'))show('setup')};
-
-function currentFeedbackTarget(){
-  if(!state.current)return null;
-  if(state.current.d==='L'){
-    const i=Math.min(state.lightningIndex,3);return{type:'L',text:state.current.questions[i],id:`L:${state.current.ids[i]}`};
-  }
-  return{type:String(state.current.d),text:state.current.q,id:state.current.id};
-}
-$('feedback').onclick=()=>{const target=currentFeedbackTarget();if(!target)return;$('feedbackText').textContent=`« ${target.text} »`;$('feedbackModal').classList.remove('hidden')};
-$('feedbackClose').onclick=()=>$('feedbackModal').classList.add('hidden');
-$('feedbackModal').onclick=e=>{if(e.target===$('feedbackModal'))$('feedbackModal').classList.add('hidden')};
-document.querySelectorAll('[data-feedback]').forEach(btn=>btn.onclick=()=>{
-  const target=currentFeedbackTarget();if(!target)return;
-  const entries=JSON.parse(localStorage.getItem('sheep-card-feedback')||'[]');entries.push({...target,feedback:btn.dataset.feedback,at:new Date().toISOString()});localStorage.setItem('sheep-card-feedback',JSON.stringify(entries));
-  $('feedbackModal').classList.add('hidden');toast('Avis enregistré');
-});
-</script>
+<script src="./game-engine.js"></script>
+<script src="./app.js"></script>
 </body>
 </html>
