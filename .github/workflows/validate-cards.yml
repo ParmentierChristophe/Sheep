@@ -30,6 +30,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Check JavaScript syntax
+        run: node --check app.js && node --check game-engine.js
       - name: Validate card banks
         run: node validate-cards.mjs
       - name: Test game engine
