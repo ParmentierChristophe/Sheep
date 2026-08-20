@@ -1,15 +1,21 @@
-name: Validate card banks
+name: Validate game
 
 on:
   push:
     paths:
       - 'cards-*.js'
       - 'validate-cards.mjs'
+      - 'game-engine.js'
+      - 'game-engine.test.mjs'
+      - 'index.html'
       - '.github/workflows/validate-cards.yml'
   pull_request:
     paths:
       - 'cards-*.js'
       - 'validate-cards.mjs'
+      - 'game-engine.js'
+      - 'game-engine.test.mjs'
+      - 'index.html'
       - '.github/workflows/validate-cards.yml'
 
 jobs:
@@ -20,4 +26,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node validate-cards.mjs
+      - name: Validate card banks
+        run: node validate-cards.mjs
+      - name: Test game engine
+        run: node game-engine.test.mjs
