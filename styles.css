@@ -20,7 +20,7 @@ button:disabled{opacity:.58;cursor:default;transform:none}
 .hidden{display:none!important}
 .app{width:min(100%,760px);min-height:100dvh;margin:0 auto;padding:max(18px,env(safe-area-inset-top)) 14px max(24px,env(safe-area-inset-bottom))}
 
-.panel,.decision,.win-card,.handoff-card{background:var(--white);border:2px solid var(--line);border-radius:14px;box-shadow:5px 5px 0 var(--line)}
+.panel,.decision,.win-card,.handoff-card,.starter-card{background:var(--white);border:2px solid var(--line);border-radius:14px;box-shadow:5px 5px 0 var(--line)}
 .btn,.answer-btn,.exit-btn,.remove-team,.feedback-btn,.card-action,.feedback-option,.modal-close{border:2px solid var(--line);border-radius:10px;font-weight:900}
 
 .brand{padding:10px 2px 22px}
@@ -48,6 +48,16 @@ button:disabled{opacity:.58;cursor:default;transform:none}
 .btn-danger{background:var(--red);color:#fff}
 .setup-actions{display:grid;grid-template-columns:1fr .58fr;gap:10px}
 .setup-footer{margin:12px 2px 0;font-size:12px;font-weight:700;color:var(--muted)}
+
+.starter-card{margin-top:8vh;padding:20px;overflow:hidden}
+.starter-kicker{font-size:11px;font-weight:1000;text-transform:uppercase;letter-spacing:.14em}
+.starter-card h2{margin:7px 0 8px;font-size:clamp(34px,9vw,54px);line-height:.9;text-transform:uppercase;letter-spacing:-2px}
+.starter-reason{min-height:38px;margin:0;color:var(--muted);font-weight:750;line-height:1.35}
+.starter-stage{margin:28px -20px 18px;padding:24px 20px;border-top:2px solid var(--line);border-bottom:2px solid var(--line);background:#fff5a8;text-align:center}
+.starter-stage small{display:block;font-size:10px;font-weight:1000;text-transform:uppercase;letter-spacing:.13em;margin-bottom:13px}
+.starter-ticker{min-height:68px;display:flex;align-items:center;justify-content:center;font-size:clamp(34px,10vw,62px);line-height:.92;font-weight:1000;text-transform:uppercase;letter-spacing:-2px;overflow-wrap:anywhere;transition:transform .08s ease}
+.starter-ticker.tick{transform:translateY(-2px)}
+.starter-result{margin:0 0 16px;border:2px solid var(--line);padding:12px;background:var(--green);color:#fff;font-weight:1000;text-transform:uppercase;text-align:center;letter-spacing:.04em}
 
 .game-top{position:sticky;top:max(8px,env(safe-area-inset-top));z-index:10;margin-bottom:12px}
 .game-bar{display:flex;align-items:stretch;gap:8px;background:var(--paper);padding:0}
@@ -108,4 +118,5 @@ button:disabled{opacity:.58;cursor:default;transform:none}
   .score-chip{min-width:116px}
   .answer-actions,.risk-actions{grid-template-columns:1fr 1fr}
   .setup-actions{grid-template-columns:1fr}
+  .starter-card{margin-top:4vh}
 }
