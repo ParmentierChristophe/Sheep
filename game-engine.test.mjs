@@ -16,6 +16,13 @@ function match(){return E.createMatch(['A','B'])}
 }
 
 {
+  const m=E.createMatch(['A','B','C'],7,2);
+  assert.equal(m.active,2);
+  assert.equal(E.activeTeam(m).name,'C');
+  assert.throws(()=>E.createMatch(['A','B'],7,2),/Invalid starting team index/);
+}
+
+{
   const m=match();
   m.teams[0].score=6;
   E.revealCard(m);E.openJudge(m);
@@ -62,14 +69,13 @@ function match(){return E.createMatch(['A','B'])}
 }
 
 {
-  const m=match();
-  E.revealCard(m);E.openJudge(m);E.succeedCard(m,1);
-  E.bank(m);
-  E.revealCard(m);E.openJudge(m);E.succeedCard(m,2);
-  E.bank(m);
-  E.rematch(m);
-  assert.deepEqual(m.teams.map(t=>t.score),[0,0]);
-  assert.equal(m.active,0);
+  const m=E.createMatch(['A','B','C']);
+  m.teams[0].score=7;
+  m.teams[1].score=3;
+  m.teams[2].score=5;
+  E.rematch(m,1);
+  assert.deepEqual(m.teams.map(t=>t.score),[0,0,0]);
+  assert.equal(m.active,1);
   assert.equal(m.phase,E.PHASE.HANDOFF);
 }
 
