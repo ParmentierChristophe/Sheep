@@ -12,11 +12,18 @@
     WON:'won'
   });
 
-  function createMatch(teamNames,targetScore=7){
+  function normalizeStartingIndex(teamCount,startingIndex=0){
+    const index=Number(startingIndex);
+    if(!Number.isInteger(index)||index<0||index>=teamCount)throw new Error('Invalid starting team index');
+    return index;
+  }
+
+  function createMatch(teamNames,targetScore=7,startingIndex=0){
     if(!Array.isArray(teamNames)||teamNames.length<2)throw new Error('At least two teams are required');
+    const active=normalizeStartingIndex(teamNames.length,startingIndex);
     return{
       teams:teamNames.map((name,i)=>({name:String(name||`Équipe ${i+1}`),score:0})),
-      active:0,
+      active,
       turnPoints:0,
       targetScore,
       phase:PHASE.HANDOFF,
@@ -101,9 +108,10 @@
     return match;
   }
 
-  function rematch(match){
+  function rematch(match,startingIndex=0){
+    const active=normalizeStartingIndex(match.teams.length,startingIndex);
     match.teams.forEach(team=>team.score=0);
-    match.active=0;
+    match.active=active;
     match.turnPoints=0;
     match.phase=PHASE.HANDOFF;
     match.winner=null;
