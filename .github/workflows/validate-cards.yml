@@ -8,6 +8,7 @@ on:
       - 'game-engine.js'
       - 'game-engine.test.mjs'
       - 'app.js'
+      - 'starter.js'
       - 'styles.css'
       - 'index.html'
       - '.github/workflows/validate-cards.yml'
@@ -18,6 +19,7 @@ on:
       - 'game-engine.js'
       - 'game-engine.test.mjs'
       - 'app.js'
+      - 'starter.js'
       - 'styles.css'
       - 'index.html'
       - '.github/workflows/validate-cards.yml'
@@ -31,7 +33,7 @@ jobs:
         with:
           node-version: '22'
       - name: Check JavaScript syntax
-        run: node --check app.js && node --check game-engine.js
+        run: node --check app.js && node --check starter.js && node --check game-engine.js
       - name: Validate card banks
         run: node validate-cards.mjs
       - name: Test game engine
